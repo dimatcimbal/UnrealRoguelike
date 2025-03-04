@@ -33,8 +33,6 @@ public:
 		meta = (AllowPrivateAccess = "true"))
         TObjectPtr<UInputAction> LookAction{nullptr};
 	
-	TObjectPtr<ARogueCharacter> CurrentCharacter;
-	
         virtual void SetupInputComponent() override;
 
 protected:
@@ -43,4 +41,5 @@ protected:
 	void Move(const FInputActionValue& Value);
 	void Look(const FInputActionValue& Value);
 	
+	TObjectPtr<ARogueCharacter> CurrentCharacter;
 };
