@@ -51,7 +51,8 @@ void ARoguePlayerController::Move(const FInputActionValue& Value) {
 
 void ARoguePlayerController::Look(const FInputActionValue &Value) {
   const FVector2D InputValue =  Value.Get<FVector2D>();
-
+  UE_LOG(LogTemp, Log, TEXT("Look Input: X=%f, Y=%f"), InputValue.X, InputValue.Y);
+  
   this->CurrentCharacter->AddControllerYawInput(InputValue.X);
   this->CurrentCharacter->AddControllerPitchInput(InputValue.Y);
 }

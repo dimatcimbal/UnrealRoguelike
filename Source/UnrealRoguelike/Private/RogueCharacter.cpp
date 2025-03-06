@@ -4,6 +4,7 @@
 #include "RogueCharacter.h"
 
 #include "Camera/CameraComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 
@@ -13,13 +14,20 @@ ARogueCharacter::ARogueCharacter()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	// Rotates the character to face the direction it's moving in
+	TObjectPtr<UCharacterMovementComponent> MovementComponent = this->GetCharacterMovement();
+	MovementComponent->bOrientRotationToMovement = true;
+	
 	// Attach a USpringArmComponent to allow camera follow the Character
-	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
-	SpringArmComp->SetupAttachment(RootComponent);
-
+	CameraArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraArmComp"));
+	CameraArmComp->SetupAttachment(RootComponent);
+	// Rotate the arm with both controller's pitch(vertical) and yaw(horizontal) rotation inputs
+	CameraArmComp->bUsePawnControlRotation = true;
+	CameraArmComp->SetUsingAbsoluteRotation(true);
+	
 	// Attach a UCameraComponent
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
-	CameraComp->SetupAttachment(SpringArmComp);
+	CameraComp->SetupAttachment(CameraArmComp);
 }
 
 // Called when the game starts or when spawned

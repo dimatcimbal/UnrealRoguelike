@@ -27,7 +27,7 @@ protected:
 	TObjectPtr<UCameraComponent> CameraComp{nullptr};
 	
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<USpringArmComponent> SpringArmComp{nullptr};
+	TObjectPtr<USpringArmComponent> CameraArmComp{nullptr};
 
 
 public:	
